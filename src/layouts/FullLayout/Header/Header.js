@@ -177,12 +177,6 @@ const Header = (props) => {
           <Divider />
           <MenuItem onClick={handleClose4}>
             <ListItemIcon>
-              <PersonAddOutlinedIcon fontSize="small" />
-            </ListItemIcon>
-            Add another account
-          </MenuItem>
-          <MenuItem onClick={handleClose4}>
-            <ListItemIcon>
               <SettingsOutlinedIcon fontSize="small" />
             </ListItemIcon>
             Settings
