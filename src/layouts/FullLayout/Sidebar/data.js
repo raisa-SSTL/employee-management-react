@@ -62,6 +62,11 @@ const Menuitems = [
     icon: DescriptionOutlinedIcon,
     href: "/task/add-task",
   },
+  {
+    title: "Employee Table View",
+    icon: AutoAwesomeMosaicOutlinedIcon,
+    href: "/employee-table",
+  },
 ];
 
 export default Menuitems;
