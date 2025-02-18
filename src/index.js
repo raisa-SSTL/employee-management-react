@@ -4,13 +4,16 @@ import App from "./App";
 import { HashRouter } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import Spinner from "./views/Spinner/Spinner";
+import { EmployeeProvider } from "./context/EmployeeContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Suspense fallback={<Spinner />}>
       <HashRouter>
-        <App />
+        <EmployeeProvider>
+          <App />
+        </EmployeeProvider>
       </HashRouter>
     </Suspense>
   </React.StrictMode>

@@ -11,44 +11,12 @@ import {
   Button
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
-const employees = [
-  {
-    id: "1",
-    name: "Sunil Joshi",
-    department: "Web Designer",
-    phone: "(305) 555-8293",
-    email: "james.wilson@example.com",
-    address: "New Delhi",
-  },
-  {
-    id: "2",
-    name: "Andrew McDownland",
-    department: "Project Manager",
-    phone: "(646) 555-1749",
-    email: "samantha.brown@testmail.com",
-    address: "London",
-  },
-  {
-    id: "3",
-    name: "Christopher Jamil",
-    department: "Project Manager",
-    phone: "(415) 555-6210",
-    email: "alexander.lee@demoemail.com",
-    address: "London",
-  },
-  {
-    id: "4",
-    name: "Nirav Joshi",
-    department: "Frontend Engineer",
-    phone: "(818) 555-0937",
-    email: "emma.johnson@mockmail.com",
-    address: "California",
-  },
-];
+import { useEmployees } from "../../context/EmployeeContext";
 
 const EmpTableContent = () => {
+
   const navigate = useNavigate();
+  const { employees } = useEmployees(); //employee data fetched from context
 
   return (
     <Table
@@ -93,8 +61,8 @@ const EmpTableContent = () => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {employees.map((product) => (
-          <TableRow key={product.name}>
+        {employees.map((employee) => (
+          <TableRow key={employee.name}>
             <TableCell>
               <Typography
                 sx={{
@@ -119,7 +87,7 @@ const EmpTableContent = () => {
                       fontWeight: "600",
                     }}
                   >
-                    {product.name}
+                    {employee.name}
                   </Typography>
                   <Typography
                     color="textSecondary"
@@ -127,24 +95,24 @@ const EmpTableContent = () => {
                       fontSize: "13px",
                     }}
                   >
-                    {product.department}
+                    {employee.department}
                   </Typography>
                 </Box>
               </Box>
             </TableCell>
             <TableCell>
               <Typography color="textSecondary" variant="h6">
-                {product.phone}
+                {employee.phone}
               </Typography>
             </TableCell>
             <TableCell>
               <Typography color="textSecondary" variant="h6">
-                {product.email}
+                {employee.email}
               </Typography>
             </TableCell>
             <TableCell>
               <Typography color="textSecondary" variant="h6">
-                {product.address}
+                {employee.address}
               </Typography>
             </TableCell>
             {/* <TableCell align="right">
@@ -162,7 +130,7 @@ const EmpTableContent = () => {
                             lg: 0,
                         },
                     }}
-                    onClick={() => navigate(`/employee-view/${employees.id}`)}
+                    onClick={() => navigate(`/employee-view/${employee.id}`)}
                 >
                     View
                 </Button>
