@@ -1,9 +1,10 @@
 import React, {useContext, useState} from "react";
-import { Card, CardContent, Box, Typography, TextField, Fab, Modal, Button } from "@mui/material";
+import { Card, CardContent, Box, Typography, TextField, Fab, Modal, Button, Menu, FormControlLabel, Checkbox } from "@mui/material";
 import EmpTableContent from "./EmpTableContent";
 import AddToPhotosOutlinedIcon from '@mui/icons-material/AddToPhotosOutlined';
 import { useNavigate } from "react-router-dom";
 import {useEmployees} from "../../context/EmployeeContext";
+import FilterListIcon from '@mui/icons-material/FilterList';
 
 const EmployeeTable = () => {
 
@@ -12,6 +13,7 @@ const EmployeeTable = () => {
   const [open, setOpen] = useState(false);
   const [errors, setErrors] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
+  const [filterOpen, setFilterOpen] = useState(null);
   const [newEmployee, setNewEmployee] = useState({
     name: "",
     phone: "",
@@ -84,6 +86,13 @@ const EmployeeTable = () => {
       employee.email.toLowerCase().includes(searchQuery)
   );
 
+  const handleFilterClick = (event) => {
+    setFilterOpen(event.currentTarget);
+  };
+  const handleFilterClose = () => {
+    setFilterOpen(null);
+  };
+
   return (
     <Box>
       <Card variant="outlined">
@@ -104,28 +113,60 @@ const EmployeeTable = () => {
                     gap: 5, 
                 }}
                 >
-                {/* Search Bar */}
-                <TextField
+                  {/* Filter Button */}
+                  <Button
+                    startIcon={<FilterListIcon />}
+                    onClick={handleFilterClick}
                     variant="outlined"
-                    size="small"
-                    placeholder="Search Employee..."
-                    value={searchQuery}
-                    onChange={handleSearch}
                     sx={{
-                      width: "250px", // width of the search bar
-                      "& .MuiOutlinedInput-root": {
-                      borderRadius: "50px", 
-                    },
+                      borderRadius: "50px",
                     }}
-                />
-                {/* Employee Add Button */}
-                <Fab
-                    color="secondary"
-                    onClick={handleAddButtonClick}
-                >
-                    <AddToPhotosOutlinedIcon />
-                </Fab>
-            </Box>
+                  >
+                    Filter
+                  </Button>
+                  <Menu
+                  anchorEl={filterOpen}
+                  open={Boolean(filterOpen)}
+                  onClose={handleFilterClose}
+                  sx={{ p: 2 }}
+                  >
+                    {/* Department Filter */}
+                    <Typography sx={{ px: 2, py: 1 }}>Filter By:</Typography>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          // checked={selectedFilters.priority.includes("High")}
+                          // onChange={() => handleCheckboxChange("priority", "High")}
+                          color="primary"
+                          sx={{ pl: 3}}
+                        />
+                      }
+                      label="Department"
+                    />
+                  </Menu>
+                  
+                  {/* Search Bar */}
+                  <TextField
+                      variant="outlined"
+                      size="small"
+                      placeholder="Search Employee..."
+                      value={searchQuery}
+                      onChange={handleSearch}
+                      sx={{
+                        width: "250px", // width of the search bar
+                        "& .MuiOutlinedInput-root": {
+                        borderRadius: "50px", 
+                      },
+                      }}
+                  />
+                  {/* Employee Add Button */}
+                  <Fab
+                      color="secondary"
+                      onClick={handleAddButtonClick}
+                  >
+                      <AddToPhotosOutlinedIcon />
+                  </Fab>
+                </Box>
             </Box>
           <Box
             sx={{
