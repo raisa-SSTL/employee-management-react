@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import AddTask from "../views/task/AddTask.js";
 import EmployeeTable from "../views/tables/EmployeeTable.js";
+import EmployeeView from "../views/tables/EmployeeView.js";
 
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout/FullLayout.js"));
@@ -47,6 +48,7 @@ const ThemeRoutes = [
 
       { path: "/task/add-task", element: <AddTask /> },
       { path: "/employee-table", element: <EmployeeTable /> },
+      { path: "/employee-view/:id", element: <EmployeeView /> },
     ],
   },
 ];

@@ -10,6 +10,7 @@ import {
   Chip,
   Button
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const employees = [
   {
@@ -47,6 +48,8 @@ const employees = [
 ];
 
 const EmpTableContent = () => {
+  const navigate = useNavigate();
+
   return (
     <Table
       aria-label="simple table"
@@ -159,7 +162,7 @@ const EmpTableContent = () => {
                             lg: 0,
                         },
                     }}
-                    // onClick={() => navigate(`/`)}
+                    onClick={() => navigate(`/employee-view/${employees.id}`)}
                 >
                     View
                 </Button>
