@@ -5,6 +5,8 @@ import AddToPhotosOutlinedIcon from '@mui/icons-material/AddToPhotosOutlined';
 import { useNavigate } from "react-router-dom";
 import {useEmployees} from "../../context/EmployeeContext";
 import FilterListIcon from '@mui/icons-material/FilterList';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EmployeeTable = () => {
 
@@ -66,13 +68,21 @@ const EmployeeTable = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // addEmployee(newEmployee); 
-    // handleClose();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors); 
     } else {
       addEmployee(newEmployee); 
+      toast.success("Employee added successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       handleClose();
     }
   };
