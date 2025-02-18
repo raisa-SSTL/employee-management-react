@@ -13,6 +13,9 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useEmployees } from "../../context/EmployeeContext";
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const EmpTableContent = ({ employees }) => {
 
@@ -34,6 +37,16 @@ const EmpTableContent = ({ employees }) => {
   const handleConfirmDelete = () => {
     if (selectedEmp) {
       deleteEmployee(selectedEmp); // delete function from context
+      toast.success("Employee deleted successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
     handleDialogClose(); 
   };
@@ -308,6 +321,7 @@ const EmpTableContent = ({ employees }) => {
           </Button>
       </DialogActions>
   </Dialog>
+  <ToastContainer />
   </>
   );
 };
