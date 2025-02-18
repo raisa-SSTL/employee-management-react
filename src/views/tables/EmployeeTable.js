@@ -1,9 +1,59 @@
-import React from "react";
-import { Card, CardContent, Box, Typography, TextField, Fab } from "@mui/material";
+import React, {useContext, useState} from "react";
+import { Card, CardContent, Box, Typography, TextField, Fab, Modal, Button } from "@mui/material";
 import EmpTableContent from "./EmpTableContent";
 import AddToPhotosOutlinedIcon from '@mui/icons-material/AddToPhotosOutlined';
+import { useNavigate } from "react-router-dom";
+import {useEmployees} from "../../context/EmployeeContext";
 
 const EmployeeTable = () => {
+
+  const navigate = useNavigate();
+  const { addEmployee } = useEmployees(); // add employee method from context
+  const [open, setOpen] = useState(false);
+  const [newEmployee, setNewEmployee] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    address: "",
+    department: "",
+    img: ""
+  });
+
+  const handleAddButtonClick = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+    setNewEmployee({
+      name: "",
+      phone: "",
+      email: "",
+      address: "",
+      department: "",
+      img: ""
+    });
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewEmployee((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setNewEmployee((prev) => ({ ...prev, img: reader.result }));
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addEmployee(newEmployee); // Add the new employee using context function
+    handleClose();
+  };
+
   return (
     <Box>
       <Card variant="outlined">
@@ -38,10 +88,10 @@ const EmployeeTable = () => {
                     },
                     }}
                 />
-                {/* Add Button */}
+                {/* Employee Add Button */}
                 <Fab
                     color="secondary"
-                    // onClick={handleButtonClick}
+                    onClick={handleAddButtonClick}
                 >
                     <AddToPhotosOutlinedIcon />
                 </Fab>
@@ -59,6 +109,80 @@ const EmployeeTable = () => {
           </Box>
         </CardContent>
       </Card>
+      {/* add employee modal */}
+      <Modal open={open} onClose={handleClose}>
+        <Box 
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 400,
+            bgcolor: "background.paper",
+            boxShadow: 24,
+            p: 4,
+            borderRadius: 2,
+          }}
+        >
+          <Typography variant="h4" sx={{ mb: 2 }} align="center">
+            Add New Employee
+          </Typography>
+          <form onSubmit={handleSubmit}>
+            <TextField
+              label="Name"
+              name="name"
+              value={newEmployee.name}
+              onChange={handleInputChange}
+              fullWidth
+              sx={{ mb: 2 }}
+            />
+            <TextField
+              label="Phone"
+              name="phone"
+              value={newEmployee.phone}
+              onChange={handleInputChange}
+              fullWidth
+              sx={{ mb: 2 }}
+            />
+            <TextField
+              label="Email"
+              name="email"
+              value={newEmployee.email}
+              onChange={handleInputChange}
+              fullWidth
+              sx={{ mb: 2 }}
+            />
+            <TextField
+              label="Address"
+              name="address"
+              value={newEmployee.address}
+              onChange={handleInputChange}
+              fullWidth
+              sx={{ mb: 2 }}
+            />
+            <TextField
+              label="Department"
+              name="department"
+              value={newEmployee.department}
+              onChange={handleInputChange}
+              fullWidth
+              sx={{ mb: 2 }}
+            />
+            <input 
+              type="file" 
+              accept="image/*" 
+              onChange={handleImageChange} 
+              style={{ marginBottom: "16px" }}
+            />
+            <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 2 }}>
+              <Button onClick={handleClose}>Cancel</Button>
+              <Button type="submit" variant="contained" color="primary">
+                Add Employee
+              </Button>
+            </Box>
+          </form>
+        </Box>
+      </Modal>
     </Box>
   );
 };
