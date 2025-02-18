@@ -10,6 +10,7 @@ const EmployeeTable = () => {
   const navigate = useNavigate();
   const { addEmployee } = useEmployees(); // add employee method from context
   const [open, setOpen] = useState(false);
+  const [errors, setErrors] = useState({});
   const [newEmployee, setNewEmployee] = useState({
     name: "",
     phone: "",
@@ -30,6 +31,7 @@ const EmployeeTable = () => {
       department: "",
       img: ""
     });
+    setErrors({});
   };
 
   const handleInputChange = (e) => {
@@ -48,10 +50,28 @@ const EmployeeTable = () => {
     }
   };
 
+  // form validation
+  const validate = () => {
+    const newErrors = {};
+    if (!newEmployee.name.trim()) newErrors.name = "This field cannot stay empty";
+    if (!newEmployee.phone.trim()) newErrors.phone = "This field cannot stay empty";
+    if (!newEmployee.email.trim()) newErrors.email = "This field cannot stay empty";
+    if (!newEmployee.address.trim()) newErrors.address = "This field cannot stay empty";
+    if (!newEmployee.department.trim()) newErrors.department = "This field cannot stay empty";
+    return newErrors;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    addEmployee(newEmployee); // Add the new employee using context function
-    handleClose();
+    // addEmployee(newEmployee); 
+    // handleClose();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors); 
+    } else {
+      addEmployee(newEmployee); 
+      handleClose();
+    }
   };
 
   return (
@@ -135,6 +155,8 @@ const EmployeeTable = () => {
               onChange={handleInputChange}
               fullWidth
               sx={{ mb: 2 }}
+              error={!!errors.name}
+              helperText={errors.name}
             />
             <TextField
               label="Phone"
@@ -143,14 +165,19 @@ const EmployeeTable = () => {
               onChange={handleInputChange}
               fullWidth
               sx={{ mb: 2 }}
+              error={!!errors.phone}
+              helperText={errors.phone}
             />
             <TextField
               label="Email"
               name="email"
+              type="email"
               value={newEmployee.email}
               onChange={handleInputChange}
               fullWidth
               sx={{ mb: 2 }}
+              error={!!errors.email}
+              helperText={errors.email}
             />
             <TextField
               label="Address"
@@ -159,6 +186,8 @@ const EmployeeTable = () => {
               onChange={handleInputChange}
               fullWidth
               sx={{ mb: 2 }}
+              error={!!errors.address}
+              helperText={errors.address}
             />
             <TextField
               label="Department"
@@ -167,6 +196,8 @@ const EmployeeTable = () => {
               onChange={handleInputChange}
               fullWidth
               sx={{ mb: 2 }}
+              error={!!errors.department}
+              helperText={errors.department}
             />
             <input 
               type="file" 
