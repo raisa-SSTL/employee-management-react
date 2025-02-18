@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState } from "react";
 import img6 from "../assets/images/big/img6.jpg";
 import img7 from "../assets/images/big/img7.jpg";
-import u7 from "../assets/images/users/u7.jpg";
-import u4 from "../assets/images/users/u4.jpg";
+import u3 from "../assets/images/backgrounds/u3.jpg";
+import u2 from "../assets/images/backgrounds/u2.jpg";
 
 const EmployeeContext = createContext();
 
@@ -16,7 +16,7 @@ const initialEmployees = [
     name: "Sunil Joshi",
     department: "Web Designer",
     phone: "(305) 555-8293",
-    email: "james.wilson@example.com",
+    email: "sunil.joshi@example.com",
     address: "New Delhi",
     img: img6,
   },
@@ -25,7 +25,7 @@ const initialEmployees = [
     name: "Andrew McDownland",
     department: "Project Manager",
     phone: "(646) 555-1749",
-    email: "samantha.brown@testmail.com",
+    email: "andrew.md@testmail.com",
     address: "London",
     img: img7,
   },
@@ -34,18 +34,18 @@ const initialEmployees = [
     name: "Christopher Jamil",
     department: "Project Manager",
     phone: "(415) 555-6210",
-    email: "alexander.lee@demoemail.com",
+    email: "jamil1122@demoemail.com",
     address: "London",
-    img: u7,
+    img: u3,
   },
   {
     id: "4",
     name: "Nirav Joshi",
     department: "Frontend Engineer",
     phone: "(818) 555-0937",
-    email: "emma.johnson@mockmail.com",
+    email: "nirav.jo@mockmail.com",
     address: "California",
-    img: u4,
+    img: u2,
   },
 ];
 

@@ -10,9 +10,32 @@ import {
 
     return (
         <Box>
-            <Typography sx={{ mb: 1 }}>
-                <strong>Photo:</strong> 
-            </Typography>
+            <Box 
+                sx={{ 
+                    display: 'flex', 
+                    justifyContent: 'center', 
+                    mb: 2 
+                }}
+            >
+                <Box 
+                    sx={{ 
+                        width: "120px", 
+                        height: "120px", 
+                        borderRadius: "50%", 
+                        overflow: "hidden" 
+                    }}
+                >
+                    <img 
+                        src={employeeData?.img} 
+                        alt={employeeData?.name} 
+                        style={{
+                            width: "100%", 
+                            height: "100%", 
+                            objectFit: "cover"
+                        }}
+                    />
+                </Box>
+            </Box>
             <Typography sx={{ mb: 1 }}>
                 <strong>Name:</strong> {employeeData?.name || "No name set"}
             </Typography>

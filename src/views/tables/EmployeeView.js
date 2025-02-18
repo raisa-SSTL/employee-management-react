@@ -48,7 +48,7 @@ const EmployeeView = () => {
                 mb: 2, 
               }}
             >
-              <Typography variant="h3">Employee Details</Typography>
+              <Typography variant="h3">Details</Typography>
                 <Button
                                           variant="contained"
                                           color="primary"
