@@ -13,7 +13,6 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useEmployees } from "../../context/EmployeeContext";
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
-import Swal from 'sweetalert2';
 
 const EmpTableContent = () => {
 
@@ -25,29 +24,6 @@ const EmpTableContent = () => {
   const handleDelete = (empId) => {
     setSelectedEmp(empId);
     setOpen(true);
-    // Swal.fire({
-    //   title: 'Are you sure?',
-    //   text: "This action cannot be undone.",
-    //   icon: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#d33',
-    //   cancelButtonColor: '#3085d6',
-    //   confirmButtonText: 'Yes, delete it!',
-    //   cancelButtonText: 'Cancel',
-    // }).then((result) => {
-    //   // if (result.isConfirmed) {
-    //   //   // Perform the delete action here, for example:
-    //   //   console.log(`Employee with ID ${empId} has been deleted.`);
-    //   //   // You can add your delete logic here, like calling an API or updating state
-    //   // }
-    //   if (result.isConfirmed) {
-    //     Swal.fire({
-    //       title: "Deleted!",
-    //       text: "Your file has been deleted.",
-    //       icon: "success"
-    //     });
-    //   }
-    // });
   };
 
   const handleDialogClose = () => {
@@ -109,14 +85,24 @@ const EmpTableContent = () => {
         {employees.map((employee) => (
           <TableRow key={employee.name}>
             <TableCell>
-              <Typography
+              {/* <Typography
                 sx={{
                   fontSize: "15px",
                   fontWeight: "500",
                 }}
               >
-                {/* {product.id} */}
-              </Typography>
+                {product.img}
+              </Typography> */}
+              <img 
+                src={employee.img} 
+                alt={employee.name} 
+                style={{
+                  width: "50px",
+                  height: "50px",
+                  borderRadius: "50%",
+                  objectFit: "cover"
+                }}
+              />
             </TableCell>
             <TableCell>
               <Box
@@ -239,7 +225,6 @@ const EmpTableContent = () => {
           </Button>
       </DialogActions>
   </Dialog>
-
   </>
   );
 };
