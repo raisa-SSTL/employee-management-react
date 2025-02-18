@@ -151,7 +151,7 @@ const EmpTableContent = () => {
             </TableCell> */}
             <TableCell align="right">
                 <Button
-                    variant="outlined"
+                    variant="contained"
                     color="primary"
                     sx={{
                     mr: 1,
@@ -166,7 +166,7 @@ const EmpTableContent = () => {
                     View
                 </Button>
                 <Button
-                    variant="outlined"
+                    variant="contained"
                     color="secondary"
                     sx={{
                         mr: 1,
@@ -181,7 +181,7 @@ const EmpTableContent = () => {
                     Update
                 </Button>
                 <Button
-                    variant="outlined"
+                    variant="contained"
                     color="error"
                     sx={{
                         mr: 1,
@@ -217,10 +217,10 @@ const EmpTableContent = () => {
           </DialogContentText>
       </DialogContent>
       <DialogActions sx={{ justifyContent: 'center', mb:2 }}>
-          <Button onClick={handleDialogClose} color="primary">
+          <Button onClick={handleDialogClose} color="primary" variant="contained">
               Cancel
           </Button>
-          <Button color="error" onClick={handleConfirmDelete}>
+          <Button color="error" onClick={handleConfirmDelete} variant="contained">
               Delete
           </Button>
       </DialogActions>

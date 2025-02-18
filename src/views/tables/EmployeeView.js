@@ -50,8 +50,8 @@ const EmployeeView = () => {
             >
               <Typography variant="h3">Employee Details</Typography>
                 <Button
-                                          variant="outlined"
-                                          color="secondary"
+                                          variant="contained"
+                                          color="primary"
                                           sx={{
                                             mr: 1,
                                             mb: {
