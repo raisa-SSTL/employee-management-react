@@ -3,14 +3,18 @@ import { useParams } from 'react-router-dom';
 import { Card, CardContent, Box, Typography, Button, CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import EmployeeViewContent from "./EmployeeViewContent";
+import { useEmployees } from '../../context/EmployeeContext';
 
 const EmployeeView = () => {
 
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const { employees } = useEmployees();
     const navigate = useNavigate();
+
+    // to find employee by id
+    const employee = employees.find((emp) => emp.id === id);
 
     //   if (loading) {
     //           return (
@@ -44,7 +48,7 @@ const EmployeeView = () => {
                 mb: 2, 
               }}
             >
-              <Typography variant="h3">Task Details</Typography>
+              <Typography variant="h3">Employee Details</Typography>
                 <Button
                                           variant="outlined"
                                           color="secondary"
@@ -70,7 +74,7 @@ const EmployeeView = () => {
                 }}
               >
                 <EmployeeViewContent 
-                    // taskData={task}
+                    employeeData={employee}
                 />
               </Box>
             </CardContent>

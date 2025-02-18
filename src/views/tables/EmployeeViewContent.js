@@ -6,36 +6,27 @@ import {
     Button
 } from "@mui/material";
   
-  const EmployeeViewContent = ({}) => {
+  const EmployeeViewContent = ({employeeData}) => {
 
     return (
         <Box>
-            {/* <Typography variant="h5" sx={{ mb: 2 }}>
-                Task Details
-            </Typography> */}
             <Typography sx={{ mb: 1 }}>
                 <strong>Photo:</strong> 
-                {/* {taskData?.id} */}
             </Typography>
             <Typography sx={{ mb: 1 }}>
-                <strong>Name:</strong> 
-                {/* {taskData?.title} */}
+                <strong>Name:</strong> {employeeData?.name || "No name set"}
             </Typography>
             <Typography sx={{ mb: 1 }}>
-                <strong>Phone:</strong> 
-                {/* {taskData?.description || "No description provided"} */}
+                <strong>Phone:</strong> {employeeData?.phone || "No phone number set"}
             </Typography>
             <Typography sx={{ mb: 1 }}>
-                <strong>Email:</strong> 
-                {/* {taskData?.priority || "Not specified"} */}
+                <strong>Email:</strong> {employeeData?.email || "No email set"}
             </Typography>
             <Typography sx={{ mb: 1 }}>
-                <strong>Address:</strong> 
-                {/* {taskData?.deadline || "No deadline set"} */}
+                <strong>Address:</strong> {employeeData?.address || "No address set"}
             </Typography>
             <Typography sx={{ mb: 1 }}>
-                <strong>Department:</strong>
-                 {/* {taskData?.status || "No status set"} */}
+                <strong>Department:</strong> {employeeData?.department || "No department set"}
             </Typography>
         </Box>
     );

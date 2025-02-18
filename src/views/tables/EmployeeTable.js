@@ -32,7 +32,10 @@ const EmployeeTable = () => {
                     // value={searchQuery}
                     // onChange={handleSearchChange}
                     sx={{
-                    width: "250px", // width of the search bar
+                      width: "250px", // width of the search bar
+                      "& .MuiOutlinedInput-root": {
+                      borderRadius: "50px", 
+                    },
                     }}
                 />
                 {/* Add Button */}
