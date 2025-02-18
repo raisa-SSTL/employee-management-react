@@ -18,7 +18,7 @@ import Swal from 'sweetalert2';
 const EmpTableContent = () => {
 
   const navigate = useNavigate();
-  const { employees } = useEmployees(); //employee data fetched from context
+  const { employees, deleteEmployee } = useEmployees(); //employee data fetched from context
   const [open, setOpen] = useState(false);
   const [selectedEmp, setSelectedEmp] = useState(null);
 
@@ -53,6 +53,13 @@ const EmpTableContent = () => {
   const handleDialogClose = () => {
     setOpen(false);
     setSelectedEmp(null);
+  };
+
+  const handleConfirmDelete = () => {
+    if (selectedEmp) {
+      deleteEmployee(selectedEmp); // delete function from context
+    }
+    handleDialogClose(); 
   };
 
   return (
@@ -214,23 +221,23 @@ const EmpTableContent = () => {
       aria-labelledby="delete-dialog-title"
       aria-describedby="delete-dialog-description"
     >
-    <DialogContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <WarningAmberIcon sx={{ color: 'orange', fontSize: '3rem', mb: 1 }} />
-        <DialogContentText 
-            id="delete-dialog-description" 
-            sx={{ textAlign: 'center' }}
-        >
-            Are you sure you want to delete this employee? 
-        </DialogContentText>
-    </DialogContent>
-    <DialogActions sx={{ justifyContent: 'center', mb:2 }}>
-        <Button onClick={handleDialogClose} color="primary">
-            Cancel
-        </Button>
-        <Button color="error">
-            Delete
-        </Button>
-    </DialogActions>
+      <DialogContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <WarningAmberIcon sx={{ color: 'orange', fontSize: '3rem', mb: 1 }} />
+          <DialogContentText 
+              id="delete-dialog-description" 
+              sx={{ textAlign: 'center' }}
+          >
+              Are you sure you want to delete this employee? 
+          </DialogContentText>
+      </DialogContent>
+      <DialogActions sx={{ justifyContent: 'center', mb:2 }}>
+          <Button onClick={handleDialogClose} color="primary">
+              Cancel
+          </Button>
+          <Button color="error" onClick={handleConfirmDelete}>
+              Delete
+          </Button>
+      </DialogActions>
   </Dialog>
 
   </>

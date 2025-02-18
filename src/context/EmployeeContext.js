@@ -45,8 +45,13 @@ const initialEmployees = [
 export const EmployeeProvider = ({ children }) => {
   const [employees, setEmployees] = useState(initialEmployees);
 
+  // Function to delete employee by ID
+  const deleteEmployee = (empId) => {
+    setEmployees(prevEmployees => prevEmployees.filter(emp => emp.id !== empId));
+  };
+
   return (
-    <EmployeeContext.Provider value={{ employees, setEmployees }}>
+    <EmployeeContext.Provider value={{ employees, setEmployees, deleteEmployee }}>
       {children}
     </EmployeeContext.Provider>
   );
