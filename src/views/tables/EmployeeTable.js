@@ -8,9 +8,10 @@ import {useEmployees} from "../../context/EmployeeContext";
 const EmployeeTable = () => {
 
   const navigate = useNavigate();
-  const { addEmployee } = useEmployees(); // add employee method from context
+  const { addEmployee, employees } = useEmployees(); // add employee method from context
   const [open, setOpen] = useState(false);
   const [errors, setErrors] = useState({});
+  const [searchQuery, setSearchQuery] = useState("");
   const [newEmployee, setNewEmployee] = useState({
     name: "",
     phone: "",
@@ -74,6 +75,15 @@ const EmployeeTable = () => {
     }
   };
 
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value.toLowerCase());
+  };
+  const filteredEmployees = employees.filter(
+    (employee) =>
+      employee.name.toLowerCase().includes(searchQuery) ||
+      employee.email.toLowerCase().includes(searchQuery)
+  );
+
   return (
     <Box>
       <Card variant="outlined">
@@ -99,8 +109,8 @@ const EmployeeTable = () => {
                     variant="outlined"
                     size="small"
                     placeholder="Search Employee..."
-                    // value={searchQuery}
-                    // onChange={handleSearchChange}
+                    value={searchQuery}
+                    onChange={handleSearch}
                     sx={{
                       width: "250px", // width of the search bar
                       "& .MuiOutlinedInput-root": {
@@ -125,7 +135,9 @@ const EmployeeTable = () => {
               },
             }}
           >
-            <EmpTableContent />
+            <EmpTableContent 
+              employees={filteredEmployees}
+            />
           </Box>
         </CardContent>
       </Card>

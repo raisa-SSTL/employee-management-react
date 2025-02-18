@@ -14,10 +14,10 @@ import { useNavigate } from "react-router-dom";
 import { useEmployees } from "../../context/EmployeeContext";
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
-const EmpTableContent = () => {
+const EmpTableContent = ({ employees }) => {
 
   const navigate = useNavigate();
-  const { employees, deleteEmployee } = useEmployees(); //employee data fetched from context
+  const { deleteEmployee } = useEmployees(); //employee data fetched from context
   const [open, setOpen] = useState(false);
   const [selectedEmp, setSelectedEmp] = useState(null);
 
@@ -82,17 +82,9 @@ const EmpTableContent = () => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {employees.map((employee) => (
+        {/* {employees.map((employee) => (
           <TableRow key={employee.name}>
             <TableCell>
-              {/* <Typography
-                sx={{
-                  fontSize: "15px",
-                  fontWeight: "500",
-                }}
-              >
-                {product.img}
-              </Typography> */}
               <img 
                 src={employee.img} 
                 alt={employee.name} 
@@ -146,9 +138,6 @@ const EmpTableContent = () => {
                 {employee.address}
               </Typography>
             </TableCell>
-            {/* <TableCell align="right">
-              <Typography variant="h6">${product.budget}k</Typography>
-            </TableCell> */}
             <TableCell align="right">
                 <Button
                     variant="contained"
@@ -197,7 +186,101 @@ const EmpTableContent = () => {
                 </Button>
             </TableCell>   
           </TableRow>
-        ))}
+        ))} */}
+
+        {employees.length > 0 ? (
+          employees.map((employee) => (
+            <TableRow key={employee.id}>
+              <TableCell>
+                <img 
+                  src={employee.img} 
+                  alt={employee.name} 
+                  style={{
+                    width: "50px",
+                    height: "50px",
+                    borderRadius: "50%",
+                    objectFit: "cover"
+                  }}
+                />
+              </TableCell>
+              <TableCell>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <Box>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontWeight: "600",
+                      }}
+                    >
+                      {employee.name}
+                    </Typography>
+                    <Typography
+                      color="textSecondary"
+                      sx={{
+                        fontSize: "13px",
+                      }}
+                    >
+                      {employee.department}
+                    </Typography>
+                  </Box>
+                </Box>
+              </TableCell>
+              <TableCell>
+                <Typography color="textSecondary" variant="h6">
+                  {employee.phone}
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography color="textSecondary" variant="h6">
+                  {employee.email}
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography color="textSecondary" variant="h6">
+                  {employee.address}
+                </Typography>
+              </TableCell>
+              <TableCell align="right">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  sx={{ mr: 1 }}
+                  onClick={() => navigate(`/employee-view/${employee.id}`)}
+                >
+                  View
+                </Button>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  sx={{ mr: 1 }}
+                >
+                  Update
+                </Button>
+                <Button
+                  variant="contained"
+                  color="error"
+                  sx={{ mr: 1 }}
+                  onClick={() => handleDelete(employee.id)}
+                >
+                  Delete
+                </Button>
+              </TableCell>   
+            </TableRow>
+          ))
+          ) : (
+          <TableRow>
+            <TableCell colSpan={6} align="center">
+              <Typography variant="h6" color="textSecondary">
+                No Employees Found
+              </Typography>
+            </TableCell>
+          </TableRow>
+        )}
       </TableBody>
     </Table>
     {/* Confirm delete alert */}
