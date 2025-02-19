@@ -93,7 +93,7 @@ const EmpTableContent = ({ employees }) => {
               Address
             </Typography>
           </TableCell>
-          <TableCell align="center">
+          <TableCell align="center" style={{ paddingLeft: "60px" }}>
             <Typography color="textSecondary" variant="h6">
               Action
             </Typography>
@@ -104,7 +104,7 @@ const EmpTableContent = ({ employees }) => {
         {employees.length > 0 ? (
           employees.map((employee) => (
             <TableRow key={employee.id}>
-              <TableCell>
+              <TableCell align="left">
                 <img 
                   src={employee.img} 
                   alt={employee.name} 
@@ -159,17 +159,17 @@ const EmpTableContent = ({ employees }) => {
                 </Typography>
               </TableCell>
               <TableCell align="right">
-                <Button
+                {/* <Button
                   variant="contained"
                   color="primary"
                   sx={{ mr: 1 }}
                   onClick={() => navigate(`/employee-view/${employee.id}`)}
                 >
                   View
-                </Button>
+                </Button> */}
                 <Button
                   variant="contained"
-                  color="secondary"
+                  color="primary"
                   onClick={() => handleUpdate(employee)}
                   sx={{ mr: 1 }}
                 >
