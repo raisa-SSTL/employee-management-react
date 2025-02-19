@@ -16,6 +16,7 @@ import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UpdateEmployeeModal from "../modal/UpdateEmployeeModal";
+import DeleteConfirmationDialog from "../../components/DeleteConfirmationDialogue";
 
 const EmpTableContent = ({ employees }) => {
 
@@ -198,30 +199,12 @@ const EmpTableContent = ({ employees }) => {
       </TableBody>
     </Table>
     {/* Confirm delete alert */}
-    <Dialog
-      open={open}
-      onClose={handleDialogClose}
-      aria-labelledby="delete-dialog-title"
-      aria-describedby="delete-dialog-description"
-    >
-      <DialogContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <WarningAmberIcon sx={{ color: 'orange', fontSize: '3rem', mb: 1 }} />
-          <DialogContentText 
-              id="delete-dialog-description" 
-              sx={{ textAlign: 'center' }}
-          >
-              Are you sure you want to delete this employee? 
-          </DialogContentText>
-      </DialogContent>
-      <DialogActions sx={{ justifyContent: 'center', mb:2 }}>
-          <Button onClick={handleDialogClose} color="primary" variant="contained">
-              Cancel
-          </Button>
-          <Button color="error" onClick={handleConfirmDelete} variant="contained">
-              Delete
-          </Button>
-      </DialogActions>
-  </Dialog>
+    <DeleteConfirmationDialog 
+        open={open} 
+        onClose={handleDialogClose} 
+        onConfirm={handleConfirmDelete} 
+        message="Are you sure you want to delete this employee?" 
+    />
   {/* update employee modal */}
   <UpdateEmployeeModal 
     open={updateModalOpen}
