@@ -67,6 +67,11 @@ const Menuitems = [
     icon: AutoAwesomeMosaicOutlinedIcon,
     href: "/employee-table",
   },
+  {
+    title: "Employee Card",
+    icon: AutoAwesomeMosaicOutlinedIcon,
+    href: "/employee-card",
+  },
 ];
 
 export default Menuitems;
