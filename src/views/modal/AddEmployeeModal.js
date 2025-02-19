@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Box, Typography, TextField, Button, Modal } from "@mui/material";
 import { toast } from "react-toastify";
 import { useEmployees } from "../../context/EmployeeContext";
+import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
+import u3 from "../../assets/images/backgrounds/u3.jpg";
 
 const AddEmployeeModal = ({ open, setOpen }) => {
 
@@ -46,7 +48,11 @@ const AddEmployeeModal = ({ open, setOpen }) => {
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
-      addEmployee(newEmployee);
+        const employeeData = {
+            ...newEmployee,
+            img: newEmployee.img || u3, // use default image if none is uploaded
+          };
+      addEmployee(employeeData);
       toast.success("Employee added successfully!", {
         position: "top-right",
         autoClose: 3000,
@@ -93,13 +99,62 @@ const AddEmployeeModal = ({ open, setOpen }) => {
         <Typography variant="h4" sx={{ mb: 2 }} align="center">
           Add New Employee
         </Typography>
+        {/* Image Upload Section */}
+        <Box sx={{ display: "flex", justifyContent: "center", position: "relative", mb: 3 }}>
+        <Box
+            sx={{
+            width: 100,
+            height: 100,
+            borderRadius: "50%",
+            overflow: "hidden",
+            border: "2px solid #ccc",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "relative",
+            cursor: "pointer",
+            }}
+            onClick={() => document.getElementById("fileInput").click()}
+        >
+            <img
+            src={newEmployee.img || u3 } // Default placeholder
+            alt="Employee"
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+            <input
+            type="file"
+            id="fileInput"
+            accept="image/*"
+            onChange={handleImageChange}
+            style={{ display: "none" }}
+            />
+        </Box>
+        <Box
+            sx={{
+            position: "absolute",
+            top: 0,
+            right: "calc(50% - 40px)", // Adjust position
+            bgcolor: "primary.main",
+            width: 30,
+            height: 30,
+            borderRadius: "50%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
+            }}
+            onClick={() => document.getElementById("fileInput").click()}
+        >
+            <AddAPhotoIcon sx={{ color: "white", fontSize: 18 }} />
+        </Box>
+        </Box>
         <form onSubmit={handleSubmit}>
           <TextField label="Name" name="name" value={newEmployee.name} onChange={handleInputChange} fullWidth sx={{ mb: 2 }} error={!!errors.name} helperText={errors.name} />
           <TextField label="Phone" name="phone" value={newEmployee.phone} onChange={handleInputChange} fullWidth sx={{ mb: 2 }} error={!!errors.phone} helperText={errors.phone} />
           <TextField label="Email" name="email" type="email" value={newEmployee.email} onChange={handleInputChange} fullWidth sx={{ mb: 2 }} error={!!errors.email} helperText={errors.email} />
           <TextField label="Address" name="address" value={newEmployee.address} onChange={handleInputChange} fullWidth sx={{ mb: 2 }} error={!!errors.address} helperText={errors.address} />
           <TextField label="Department" name="department" value={newEmployee.department} onChange={handleInputChange} fullWidth sx={{ mb: 2 }} error={!!errors.department} helperText={errors.department} />
-          <input type="file" accept="image/*" onChange={handleImageChange} style={{ marginBottom: "16px" }} />
+          {/* <input type="file" accept="image/*" onChange={handleImageChange} style={{ marginBottom: "16px" }} /> */}
           <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 2 }}>
             <Button onClick={handleClose}>Cancel</Button>
             <Button type="submit" variant="contained" color="primary">
