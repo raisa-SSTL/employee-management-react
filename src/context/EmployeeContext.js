@@ -63,8 +63,16 @@ export const EmployeeProvider = ({ children }) => {
     setEmployees((prev) => [...prev, { ...newEmployee, id: Date.now() }]);
   };
 
+  // update employee method
+  const updateEmployee = (updatedEmp) => {
+    setEmployees((prevEmployees) =>
+      prevEmployees.map((emp) => (emp.id === updatedEmp.id ? updatedEmp : emp))
+    );
+  };
+  
+
   return (
-    <EmployeeContext.Provider value={{ employees, setEmployees, deleteEmployee, addEmployee }}>
+    <EmployeeContext.Provider value={{ employees, setEmployees, deleteEmployee, addEmployee, updateEmployee }}>
       {children}
     </EmployeeContext.Provider>
   );

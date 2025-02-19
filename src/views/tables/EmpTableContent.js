@@ -15,7 +15,7 @@ import { useEmployees } from "../../context/EmployeeContext";
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import UpdateEmployeeModal from "../modal/UpdateEmployeeModal";
 
 const EmpTableContent = ({ employees }) => {
 
@@ -23,6 +23,7 @@ const EmpTableContent = ({ employees }) => {
   const { deleteEmployee } = useEmployees(); //employee data fetched from context
   const [open, setOpen] = useState(false);
   const [selectedEmp, setSelectedEmp] = useState(null);
+  const [updateModalOpen, setUpdateModalOpen] = useState(false);
 
   const handleDelete = (empId) => {
     setSelectedEmp(empId);
@@ -49,6 +50,11 @@ const EmpTableContent = ({ employees }) => {
       });
     }
     handleDialogClose(); 
+  };
+
+  const handleUpdate = (employee) => {
+    setSelectedEmp(employee);
+    setUpdateModalOpen(true);
   };
 
   return (
@@ -95,112 +101,6 @@ const EmpTableContent = ({ employees }) => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {/* {employees.map((employee) => (
-          <TableRow key={employee.name}>
-            <TableCell>
-              <img 
-                src={employee.img} 
-                alt={employee.name} 
-                style={{
-                  width: "50px",
-                  height: "50px",
-                  borderRadius: "50%",
-                  objectFit: "cover"
-                }}
-              />
-            </TableCell>
-            <TableCell>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <Box>
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontWeight: "600",
-                    }}
-                  >
-                    {employee.name}
-                  </Typography>
-                  <Typography
-                    color="textSecondary"
-                    sx={{
-                      fontSize: "13px",
-                    }}
-                  >
-                    {employee.department}
-                  </Typography>
-                </Box>
-              </Box>
-            </TableCell>
-            <TableCell>
-              <Typography color="textSecondary" variant="h6">
-                {employee.phone}
-              </Typography>
-            </TableCell>
-            <TableCell>
-              <Typography color="textSecondary" variant="h6">
-                {employee.email}
-              </Typography>
-            </TableCell>
-            <TableCell>
-              <Typography color="textSecondary" variant="h6">
-                {employee.address}
-              </Typography>
-            </TableCell>
-            <TableCell align="right">
-                <Button
-                    variant="contained"
-                    color="primary"
-                    sx={{
-                    mr: 1,
-                    mb: {
-                            xs: 1,
-                            sm: 0,
-                            lg: 0,
-                        },
-                    }}
-                    onClick={() => navigate(`/employee-view/${employee.id}`)}
-                >
-                    View
-                </Button>
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    sx={{
-                        mr: 1,
-                        mb: {
-                            xs: 1,
-                            sm: 0,
-                            lg: 0,
-                        },
-                    }}
-                    // onClick={() => navigate(`/`)}
-                >
-                    Update
-                </Button>
-                <Button
-                    variant="contained"
-                    color="error"
-                    sx={{
-                        mr: 1,
-                        mb: {
-                        xs: 1,
-                        sm: 0,
-                        lg: 0,
-                    },
-                    }}
-                    onClick={() => handleDelete(employee.id)}
-                >
-                    Delete
-                </Button>
-            </TableCell>   
-          </TableRow>
-        ))} */}
-
         {employees.length > 0 ? (
           employees.map((employee) => (
             <TableRow key={employee.id}>
@@ -270,6 +170,7 @@ const EmpTableContent = ({ employees }) => {
                 <Button
                   variant="contained"
                   color="secondary"
+                  onClick={() => handleUpdate(employee)}
                   sx={{ mr: 1 }}
                 >
                   Update
@@ -321,6 +222,13 @@ const EmpTableContent = ({ employees }) => {
           </Button>
       </DialogActions>
   </Dialog>
+  {/* update employee modal */}
+  <UpdateEmployeeModal 
+    open={updateModalOpen}
+    setOpen={setUpdateModalOpen}
+    employee={selectedEmp}
+  />
+  {/* toast notification */}
   <ToastContainer />
   </>
   );
