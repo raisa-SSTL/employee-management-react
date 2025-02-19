@@ -47,6 +47,7 @@ const ThemeRoutes = [
       //--------------------------
 
       { path: "/task/add-task", element: <AddTask /> },
+      
       { path: "/employee-table", element: <EmployeeTable /> },
       { path: "/employee-view/:id", element: <EmployeeView /> },
     ],
