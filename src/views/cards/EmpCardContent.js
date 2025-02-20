@@ -2,42 +2,9 @@ import React, {useState} from "react";
 import {
   Typography,
   Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Chip,
-  Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Card, CardContent
+  Button, Grid, Card, CardContent
 } from "@mui/material";
-// import user1 from "../../assets/images/backgrounds/u2.jpg";
-// import user2 from "../../assets/images/backgrounds/u3.jpg";
-// import user3 from "../../assets/images/backgrounds/u4.jpg";
 import {useEmployees} from "../../context/EmployeeContext";
-
-// const blogs = [
-//     {
-//       img: user1,
-//       title: "Super awesome, Angular 12 is coming soon!",
-//       subtitle:
-//         "Some quick example text to build on the card title and make up the bulk of the card's content.",
-//       btncolor: "error",
-//     },
-//     {
-//       img: user2,
-//       title: "Super awesome, Angular 12 is coming soon!",
-//       subtitle:
-//         "Some quick example text to build on the card title and make up the bulk of the card's content.",
-//       btncolor: "warning",
-//     },
-//     {
-//       img: user3,
-//       title: "Super awesome, Angular 12 is coming soon!",
-//       subtitle:
-//         "Some quick example text to build on the card title and make up the bulk of the card's content.",
-//       btncolor: "primary",
-//     },
-// ];
 
 const EmpCardContent = ({ }) => {
 
@@ -65,8 +32,8 @@ const EmpCardContent = ({ }) => {
                             >
                                 <Box
                                     sx={{
-                                        height: 200, // Fixed height
-                                        overflow: "hidden", // Ensures images don’t exceed the box
+                                        height: 200, // fixed height for image
+                                        overflow: "hidden", 
                                         display: "flex",
                                         justifyContent: "center",
                                         alignItems: "center",
@@ -137,16 +104,11 @@ const EmpCardContent = ({ }) => {
                                 >
                                     {employee.address}
                                 </Typography>
-                                <Button
-                                    variant="contained"
-                                    sx={{
-                                    mt: "15px",
-                                    }}
-                                    // color={blog.btncolor}
-                                    color="error"
-                                >
-                                    Delete
-                                </Button>
+                                <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
+                                    <Button variant="contained" color="error" >
+                                        Delete
+                                    </Button>
+                                </Box>
                                 </CardContent>
                             </Card>
                             </Grid>
