@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useEmployees } from "../../context/EmployeeContext";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import u3 from "../../assets/images/backgrounds/u3.jpg";
+import defaultuser from "../../assets/images/users/defaultuser.jpg";
 
 const AddEmployeeModal = ({ open, setOpen }) => {
 
@@ -50,7 +51,7 @@ const AddEmployeeModal = ({ open, setOpen }) => {
     } else {
         const employeeData = {
             ...newEmployee,
-            img: newEmployee.img || u3, // use default image if none is uploaded
+            img: newEmployee.img || defaultuser, // use default image if none is uploaded
           };
       addEmployee(employeeData);
       toast.success("Employee added successfully!", {
@@ -117,7 +118,7 @@ const AddEmployeeModal = ({ open, setOpen }) => {
             onClick={() => document.getElementById("fileInput").click()}
         >
             <img
-            src={newEmployee.img || u3 } // Default placeholder
+            src={newEmployee.img || defaultuser } // Default placeholder
             alt="Employee"
             style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />

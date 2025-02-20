@@ -4,18 +4,19 @@ import { toast } from "react-toastify";
 import { useEmployees } from "../../context/EmployeeContext";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import u3 from "../../assets/images/backgrounds/u3.jpg";
+import defaultuser from "../../assets/images/users/defaultuser.jpg";
 
 const UpdateEmployeeModal = ({ open, setOpen, employee }) => {
 
     const { updateEmployee } = useEmployees(); // from context
     const [updatedEmployee, setUpdatedEmployee] = useState(employee);
-    const [imagePreview, setImagePreview] = useState(updatedEmployee?.img || u3 ); 
+    const [imagePreview, setImagePreview] = useState(updatedEmployee?.img || defaultuser ); 
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
         if (employee) {
           setUpdatedEmployee(employee);
-          setImagePreview(employee.img || u3);
+          setImagePreview(employee.img || defaultuser);
         }
     }, [employee]);
 
@@ -108,7 +109,7 @@ const UpdateEmployeeModal = ({ open, setOpen, employee }) => {
                 onClick={() => document.getElementById("fileInput").click()}
             >
                 <img
-                src={imagePreview || u3 } 
+                src={imagePreview || defaultuser } 
                 alt="Employee"
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
