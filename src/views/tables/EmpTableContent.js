@@ -85,7 +85,17 @@ const EmpTableContent = ({ employees }) => {
       <TableBody>
         {employees.length > 0 ? (
           employees.map((employee) => (
-            <TableRow key={employee.id}>
+            <TableRow key={employee.id} 
+              sx={{
+                p: 0,
+                width: "100%",
+                transition: "0.3s", // smooth transition
+                "&:hover": {
+                    boxShadow: "0px 5px 15px rgba(0, 123, 255, 0.5)", 
+                    transform: "scale(1)", // slightly enlarge the card
+                },
+              }}
+            >
               <TableCell align="left">
                 <img 
                   src={employee.img} 
