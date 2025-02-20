@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {
   Typography,
   Box,
-  Button, Grid, Card, CardContent, TableRow, TableCell
+  Button, Grid, Card, CardContent, TableRow, TableCell, TablePagination
 } from "@mui/material";
 import DeleteConfirmationDialog from "../../components/DeleteConfirmationDialogue";
 import { ToastContainer } from "react-toastify";
@@ -11,6 +11,8 @@ const EmpCardContent = ({ employees }) => {
  
   const [open, setOpen] = useState(false);
   const [selectedEmp, setSelectedEmp] = useState(null);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(6); // 6 cards per page
 
   const handleDelete = (empId) => {
     setSelectedEmp(empId);
@@ -22,11 +24,27 @@ const EmpCardContent = ({ employees }) => {
     setSelectedEmp(null);
   };
 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  // cards per page change
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  // split employees for pagination
+  const paginatedEmployees = employees.slice(
+    page * rowsPerPage,
+    page * rowsPerPage + rowsPerPage
+  );
+
     return(
         <>
         <Grid container>
-        {employees.length > 0 ? (
-                        employees.map((employee, index) => (
+        {paginatedEmployees.length > 0 ? (
+                        paginatedEmployees.map((employee, index) => (
                             <Grid
                             key={index}
                             item
@@ -146,6 +164,17 @@ const EmpCardContent = ({ employees }) => {
         onClose={handleDialogClose} 
         message="Are you sure you want to delete this employee?" 
         employee={selectedEmp}
+        />
+        {/* Pagination Controls */}
+        <TablePagination
+          component="div"
+          count={employees.length}
+          page={page}
+          onPageChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+          labelRowsPerPage="Cards per page:"
+          rowsPerPageOptions={[6, 12, 18]}
         />
         {/* toast notification */}
         <ToastContainer />

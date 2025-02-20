@@ -204,7 +204,7 @@ const EmpTableContent = ({ employees }) => {
         )}
       </TableBody>
     </Table>
-    {/* Pagination Controls */}
+    {/* Pagination */}
     <TablePagination
         rowsPerPageOptions={[5, 10, 15]}
         component="div"
