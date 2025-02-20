@@ -10,39 +10,42 @@ import {
   Chip,
   Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Card, CardContent
 } from "@mui/material";
-import user1 from "../../assets/images/backgrounds/u2.jpg";
-import user2 from "../../assets/images/backgrounds/u3.jpg";
-import user3 from "../../assets/images/backgrounds/u4.jpg";
+// import user1 from "../../assets/images/backgrounds/u2.jpg";
+// import user2 from "../../assets/images/backgrounds/u3.jpg";
+// import user3 from "../../assets/images/backgrounds/u4.jpg";
+import {useEmployees} from "../../context/EmployeeContext";
 
-const blogs = [
-    {
-      img: user1,
-      title: "Super awesome, Angular 12 is coming soon!",
-      subtitle:
-        "Some quick example text to build on the card title and make up the bulk of the card's content.",
-      btncolor: "error",
-    },
-    {
-      img: user2,
-      title: "Super awesome, Angular 12 is coming soon!",
-      subtitle:
-        "Some quick example text to build on the card title and make up the bulk of the card's content.",
-      btncolor: "warning",
-    },
-    {
-      img: user3,
-      title: "Super awesome, Angular 12 is coming soon!",
-      subtitle:
-        "Some quick example text to build on the card title and make up the bulk of the card's content.",
-      btncolor: "primary",
-    },
-];
+// const blogs = [
+//     {
+//       img: user1,
+//       title: "Super awesome, Angular 12 is coming soon!",
+//       subtitle:
+//         "Some quick example text to build on the card title and make up the bulk of the card's content.",
+//       btncolor: "error",
+//     },
+//     {
+//       img: user2,
+//       title: "Super awesome, Angular 12 is coming soon!",
+//       subtitle:
+//         "Some quick example text to build on the card title and make up the bulk of the card's content.",
+//       btncolor: "warning",
+//     },
+//     {
+//       img: user3,
+//       title: "Super awesome, Angular 12 is coming soon!",
+//       subtitle:
+//         "Some quick example text to build on the card title and make up the bulk of the card's content.",
+//       btncolor: "primary",
+//     },
+// ];
 
-const EmpCardContent = ({ employees }) => {
+const EmpCardContent = ({ }) => {
+
+  const { employees } = useEmployees(); 
 
     return(
         <Grid container>
-                        {blogs.map((blog, index) => (
+                        {employees.map((employee, index) => (
                             <Grid
                             key={index}
                             item
@@ -60,7 +63,26 @@ const EmpCardContent = ({ employees }) => {
                                 width: "100%",
                                 }}
                             >
-                                <img src={blog.img} alt="img" width="100%" />
+                                <Box
+                                    sx={{
+                                        height: 200, // Fixed height
+                                        overflow: "hidden", // Ensures images don’t exceed the box
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                    }}
+                                >
+                                    <img 
+                                        src={employee.img} 
+                                        alt="Employee" 
+                                        style={{
+                                            width: "100%", 
+                                            height: "100%", 
+                                            objectFit: "cover" // Ensures uniformity
+                                        }} 
+                                    />
+                                </Box>
+                                {/* <img src={employee.img} alt="img" width="100%" /> */}
                                 <CardContent
                                 sx={{
                                     paddingLeft: "30px",
@@ -73,7 +95,7 @@ const EmpCardContent = ({ employees }) => {
                                     fontWeight: "500",
                                     }}
                                 >
-                                    {blog.title}
+                                    {employee.name}
                                 </Typography>
                                 <Typography
                                     color="textSecondary"
@@ -83,16 +105,47 @@ const EmpCardContent = ({ employees }) => {
                                     mt: 1,
                                     }}
                                 >
-                                    {blog.subtitle}
+                                    {employee.department}
+                                </Typography>
+                                <Typography
+                                    color="textSecondary"
+                                    sx={{
+                                    fontSize: "14px",
+                                    fontWeight: "400",
+                                    mt: 1,
+                                    }}
+                                >
+                                    {employee.phone}
+                                </Typography>
+                                <Typography
+                                    color="textSecondary"
+                                    sx={{
+                                    fontSize: "14px",
+                                    fontWeight: "400",
+                                    mt: 1,
+                                    }}
+                                >
+                                    {employee.email}
+                                </Typography>
+                                <Typography
+                                    color="textSecondary"
+                                    sx={{
+                                    fontSize: "14px",
+                                    fontWeight: "400",
+                                    mt: 1,
+                                    }}
+                                >
+                                    {employee.address}
                                 </Typography>
                                 <Button
                                     variant="contained"
                                     sx={{
                                     mt: "15px",
                                     }}
-                                    color={blog.btncolor}
+                                    // color={blog.btncolor}
+                                    color="error"
                                 >
-                                    Learn More
+                                    Delete
                                 </Button>
                                 </CardContent>
                             </Card>
