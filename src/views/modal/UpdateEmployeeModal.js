@@ -5,6 +5,8 @@ import { useEmployees } from "../../context/EmployeeContext";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import u3 from "../../assets/images/backgrounds/u3.jpg";
 import defaultuser from "../../assets/images/users/defaultuser.jpg";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/bootstrap.css";
 
 const UpdateEmployeeModal = ({ open, setOpen, employee }) => {
 
@@ -150,7 +152,7 @@ const UpdateEmployeeModal = ({ open, setOpen, employee }) => {
                 error={!!errors.name} 
                 helperText={errors.name} 
               />
-              <TextField 
+              {/* <TextField 
                 label="Phone" 
                 name="phone" 
                 value={updatedEmployee?.phone || ""}
@@ -159,7 +161,19 @@ const UpdateEmployeeModal = ({ open, setOpen, employee }) => {
                 sx={{ mb: 2 }} 
                 error={!!errors.phone} 
                 helperText={errors.phone} 
+              /> */}
+              <PhoneInput
+                country={"eg"}
+                enableSearch={true}
+                value={updatedEmployee?.phone || ""}
+                onChange={(phone) => setUpdatedEmployee((prev) => ({ ...prev, phone }))}
+                inputStyle={{ width: "100%" }}
               />
+                {errors.phone && (
+                  <Typography variant="body2" sx={{ color: "red", mt: 0.5 }}>
+                    {errors.phone}
+                  </Typography>
+                )}
               <TextField 
                 label="Email" 
                 name="email" 
@@ -167,7 +181,7 @@ const UpdateEmployeeModal = ({ open, setOpen, employee }) => {
                 value={updatedEmployee?.email || ""}
                 onChange={handleInputChange} 
                 fullWidth 
-                sx={{ mb: 2 }} 
+                sx={{ mb: 2, mt:2 }} 
                 error={!!errors.email} 
                 helperText={errors.email} 
               />
