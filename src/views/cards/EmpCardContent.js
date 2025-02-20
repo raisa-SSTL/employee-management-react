@@ -5,12 +5,27 @@ import {
   Button, Grid, Card, CardContent
 } from "@mui/material";
 import {useEmployees} from "../../context/EmployeeContext";
+import DeleteConfirmationDialog from "../../components/DeleteConfirmationDialogue";
+import { ToastContainer } from "react-toastify";
 
 const EmpCardContent = ({ }) => {
 
   const { employees } = useEmployees(); 
+  const [open, setOpen] = useState(false);
+  const [selectedEmp, setSelectedEmp] = useState(null);
+
+  const handleDelete = (empId) => {
+    setSelectedEmp(empId);
+    setOpen(true);
+  };
+
+  const handleDialogClose = () => {
+    setOpen(false);
+    setSelectedEmp(null);
+  };
 
     return(
+        <>
         <Grid container>
                         {employees.map((employee, index) => (
                             <Grid
@@ -105,7 +120,7 @@ const EmpCardContent = ({ }) => {
                                     {employee.address}
                                 </Typography>
                                 <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
-                                    <Button variant="contained" color="error" >
+                                    <Button variant="contained" color="error" onClick={() => handleDelete(employee.id)}>
                                         Delete
                                     </Button>
                                 </Box>
@@ -114,6 +129,16 @@ const EmpCardContent = ({ }) => {
                             </Grid>
                         ))}
                     </Grid>
+        {/* Confirm delete alert */}
+        <DeleteConfirmationDialog 
+        open={open} 
+        onClose={handleDialogClose} 
+        message="Are you sure you want to delete this employee?" 
+        employee={selectedEmp}
+        />
+        {/* toast notification */}
+        <ToastContainer />
+    </>
     );
 };
 

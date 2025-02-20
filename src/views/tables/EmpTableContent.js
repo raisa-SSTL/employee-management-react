@@ -11,7 +11,6 @@ import {
   Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, 
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useEmployees } from "../../context/EmployeeContext";
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -21,7 +20,6 @@ import DeleteConfirmationDialog from "../../components/DeleteConfirmationDialogu
 const EmpTableContent = ({ employees }) => {
 
   const navigate = useNavigate();
-  const { deleteEmployee } = useEmployees(); //employee data fetched from context
   const [open, setOpen] = useState(false);
   const [selectedEmp, setSelectedEmp] = useState(null);
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
@@ -34,23 +32,6 @@ const EmpTableContent = ({ employees }) => {
   const handleDialogClose = () => {
     setOpen(false);
     setSelectedEmp(null);
-  };
-
-  const handleConfirmDelete = () => {
-    if (selectedEmp) {
-      deleteEmployee(selectedEmp); // delete function from context
-      toast.success("Employee deleted successfully!", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-    }
-    handleDialogClose(); 
   };
 
   const handleUpdate = (employee) => {
@@ -202,8 +183,8 @@ const EmpTableContent = ({ employees }) => {
     <DeleteConfirmationDialog 
         open={open} 
         onClose={handleDialogClose} 
-        onConfirm={handleConfirmDelete} 
         message="Are you sure you want to delete this employee?" 
+        employee={selectedEmp}
     />
   {/* update employee modal */}
   <UpdateEmployeeModal 

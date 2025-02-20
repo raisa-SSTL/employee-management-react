@@ -7,8 +7,30 @@ import {
   Button,
 } from "@mui/material";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
+import { useEmployees } from "../context/EmployeeContext";
+import { ToastContainer, toast } from "react-toastify";
 
-const DeleteConfirmationDialog = ({ open, onClose, onConfirm, message }) => {
+const DeleteConfirmationDialog = ({ open, onClose, message, employee }) => {
+
+  const { deleteEmployee } = useEmployees(); //employee data fetched from context
+
+  const handleConfirmDelete = () => {
+      if (employee) {
+        deleteEmployee(employee); // delete function from context
+        toast.success("Employee deleted successfully!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
+      onClose(); 
+    };
+
   return (
     <Dialog
       open={open}
@@ -26,7 +48,7 @@ const DeleteConfirmationDialog = ({ open, onClose, onConfirm, message }) => {
         <Button onClick={onClose} color="primary" variant="contained">
           Cancel
         </Button>
-        <Button color="error" onClick={onConfirm} variant="contained">
+        <Button color="error" onClick={handleConfirmDelete} variant="contained">
           Delete
         </Button>
       </DialogActions>
