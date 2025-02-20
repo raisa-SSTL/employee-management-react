@@ -57,7 +57,11 @@ const Header = (props) => {
   };
 
   return (
-    <AppBar sx={props.sx} elevation={0} className={props.customClass}>
+    <AppBar sx={{
+      ...props.sx, // Keep existing styles
+      // backgroundColor: "#a7cfdf", 
+      // boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+    }} elevation={0} className={props.customClass}>
       <Toolbar>
         <IconButton
           color="inherit"

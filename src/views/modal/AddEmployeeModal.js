@@ -5,10 +5,13 @@ import { useEmployees } from "../../context/EmployeeContext";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import u3 from "../../assets/images/backgrounds/u3.jpg";
 import defaultuser from "../../assets/images/users/defaultuser.jpg";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/bootstrap.css";
 
 const AddEmployeeModal = ({ open, setOpen }) => {
 
     const { addEmployee } = useEmployees();
+    const [phoneNo, setPhoneNo] = useState("");
 
   const [newEmployee, setNewEmployee] = useState({
     name: "",
@@ -151,8 +154,20 @@ const AddEmployeeModal = ({ open, setOpen }) => {
         </Box>
         <form onSubmit={handleSubmit}>
           <TextField label="Name" name="name" value={newEmployee.name} onChange={handleInputChange} fullWidth sx={{ mb: 2 }} error={!!errors.name} helperText={errors.name} />
-          <TextField label="Phone" name="phone" value={newEmployee.phone} onChange={handleInputChange} fullWidth sx={{ mb: 2 }} error={!!errors.phone} helperText={errors.phone} />
-          <TextField label="Email" name="email" type="email" value={newEmployee.email} onChange={handleInputChange} fullWidth sx={{ mb: 2 }} error={!!errors.email} helperText={errors.email} />
+          {/* <TextField label="Phone" name="phone" value={newEmployee.phone} onChange={handleInputChange} fullWidth sx={{ mb: 2 }} error={!!errors.phone} helperText={errors.phone} /> */}
+          <PhoneInput
+            country={"eg"}
+            enableSearch={true}
+            value={newEmployee.phone}
+            onChange={(phone) => setNewEmployee((prev) => ({ ...prev, phone }))}
+            inputStyle={{ width: "100%" }}
+          />
+            {errors.phone && (
+              <Typography variant="body2" sx={{ color: "red", mt: 0.5 }}>
+                {errors.phone}
+              </Typography>
+            )}
+          <TextField label="Email" name="email" type="email" value={newEmployee.email} onChange={handleInputChange} fullWidth sx={{ mb: 2, mt:2 }} error={!!errors.email} helperText={errors.email} />
           <TextField label="Address" name="address" value={newEmployee.address} onChange={handleInputChange} fullWidth sx={{ mb: 2 }} error={!!errors.address} helperText={errors.address} />
           <TextField label="Department" name="department" value={newEmployee.department} onChange={handleInputChange} fullWidth sx={{ mb: 2 }} error={!!errors.department} helperText={errors.department} />
           {/* <input type="file" accept="image/*" onChange={handleImageChange} style={{ marginBottom: "16px" }} /> */}
