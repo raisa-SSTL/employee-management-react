@@ -40,8 +40,13 @@ const EmpCardContent = ({ employees }) => {
                             <Card
                                 variant="outlined"
                                 sx={{
-                                p: 0,
-                                width: "100%",
+                                    p: 0,
+                                    width: "100%",
+                                    transition: "0.3s", // smooth transition
+                                    "&:hover": {
+                                        boxShadow: "0px 5px 15px rgba(0, 123, 255, 0.5)", 
+                                        transform: "scale(1.02)", // slightly enlarge the card
+                                    },
                                 }}
                             >
                                 <Box
