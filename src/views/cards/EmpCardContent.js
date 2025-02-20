@@ -2,15 +2,13 @@ import React, {useState} from "react";
 import {
   Typography,
   Box,
-  Button, Grid, Card, CardContent
+  Button, Grid, Card, CardContent, TableRow, TableCell
 } from "@mui/material";
-import {useEmployees} from "../../context/EmployeeContext";
 import DeleteConfirmationDialog from "../../components/DeleteConfirmationDialogue";
 import { ToastContainer } from "react-toastify";
 
-const EmpCardContent = ({ }) => {
-
-  const { employees } = useEmployees(); 
+const EmpCardContent = ({ employees }) => {
+ 
   const [open, setOpen] = useState(false);
   const [selectedEmp, setSelectedEmp] = useState(null);
 
@@ -27,7 +25,8 @@ const EmpCardContent = ({ }) => {
     return(
         <>
         <Grid container>
-                        {employees.map((employee, index) => (
+        {employees.length > 0 ? (
+                        employees.map((employee, index) => (
                             <Grid
                             key={index}
                             item
@@ -127,7 +126,14 @@ const EmpCardContent = ({ }) => {
                                 </CardContent>
                             </Card>
                             </Grid>
-                        ))}
+                        ))
+                    ) : (
+                        <Grid item xs={12} sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "200px" }}>
+                            <Typography variant="h6" color="textSecondary">
+                                No Employees Found
+                            </Typography>
+                        </Grid>
+                    )}
                     </Grid>
         {/* Confirm delete alert */}
         <DeleteConfirmationDialog 

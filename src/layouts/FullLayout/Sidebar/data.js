@@ -63,7 +63,7 @@ const Menuitems = [
     href: "/task/add-task",
   },
   {
-    title: "Employee Table View",
+    title: "Employee Table",
     icon: AutoAwesomeMosaicOutlinedIcon,
     href: "/employee-table",
   },
