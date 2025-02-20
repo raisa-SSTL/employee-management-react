@@ -1,8 +1,11 @@
 import React, { createContext, useContext, useState } from "react";
 import img6 from "../assets/images/big/img6.jpg";
 import img7 from "../assets/images/big/img7.jpg";
+import img5 from "../assets/images/big/img5.jpg";
 import u3 from "../assets/images/backgrounds/u3.jpg";
 import u2 from "../assets/images/backgrounds/u2.jpg";
+import user from "../assets/images/users/user.jpg";
+import defaultuser from "../assets/images/users/defaultuser.jpg";
 
 const EmployeeContext = createContext();
 
@@ -46,6 +49,33 @@ const initialEmployees = [
     email: "nirav.jo@mockmail.com",
     address: "California",
     img: u2,
+  },
+  {
+    id: "5",
+    name: "Syed Kabir",
+    department: "Web Designer",
+    phone: "(818) 511-0865",
+    email: "syed.k@mockmail.com",
+    address: "Dhaka",
+    img: img5,
+  },
+  {
+    id: "6",
+    name: "Shahid Khan",
+    department: "HR Manager",
+    phone: "(818) 632-9563",
+    email: "khan.shahid@mockmail.com",
+    address: "Hawaii",
+    img: defaultuser,
+  },
+  {
+    id: "7",
+    name: "Anil Fezor",
+    department: "Frontend Engineer",
+    phone: "(88) 271-4635",
+    email: "zor.dcc@mockmail.com",
+    address: "California",
+    img: user,
   },
 ];
 

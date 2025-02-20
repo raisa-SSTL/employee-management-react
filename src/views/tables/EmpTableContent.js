@@ -8,7 +8,7 @@ import {
   TableHead,
   TableRow,
   Chip,
-  Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, 
+  Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TablePagination, 
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
@@ -23,6 +23,8 @@ const EmpTableContent = ({ employees }) => {
   const [open, setOpen] = useState(false);
   const [selectedEmp, setSelectedEmp] = useState(null);
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handleDelete = (empId) => {
     setSelectedEmp(empId);
@@ -38,6 +40,19 @@ const EmpTableContent = ({ employees }) => {
     setSelectedEmp(employee);
     setUpdateModalOpen(true);
   };
+
+  const handlePageChange = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  // rows per page 
+  const handleRowsPerPageChange = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  // split employees array for pagination
+  const paginatedEmployees = employees.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
     <>
@@ -83,8 +98,8 @@ const EmpTableContent = ({ employees }) => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {employees.length > 0 ? (
-          employees.map((employee) => (
+        {paginatedEmployees.length > 0 ? (
+          paginatedEmployees.map((employee) => (
             <TableRow key={employee.id} 
               sx={{
                 p: 0,
@@ -189,6 +204,17 @@ const EmpTableContent = ({ employees }) => {
         )}
       </TableBody>
     </Table>
+    {/* Pagination Controls */}
+    <TablePagination
+        rowsPerPageOptions={[5, 10, 15]}
+        component="div"
+        count={employees.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handlePageChange}
+        onRowsPerPageChange={handleRowsPerPageChange}
+        color="primary"
+      />
     {/* Confirm delete alert */}
     <DeleteConfirmationDialog 
         open={open} 
