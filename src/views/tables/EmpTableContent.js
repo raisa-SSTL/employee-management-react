@@ -17,7 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 import UpdateEmployeeModal from "../modal/UpdateEmployeeModal";
 import DeleteConfirmationDialog from "../../components/DeleteConfirmationDialogue";
 
-const EmpTableContent = ({ employees, isDepartmentFilterEnabled }) => {
+const EmpTableContent = ({ employees }) => {
 
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -53,20 +53,6 @@ const EmpTableContent = ({ employees, isDepartmentFilterEnabled }) => {
 
   // split employees array for pagination
   const paginatedEmployees = employees.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-
-  // Group employees by department
-  const groupEmployeesByDepartment = () => {
-    return employees.reduce((acc, emp) => {
-      if (!acc[emp.department]) {
-        acc[emp.department] = [];
-      }
-      acc[emp.department].push(emp);
-      return acc;
-    }, {});
-  };
-
-  // Apply department grouping if filter is enabled
-  const groupedEmployees = isDepartmentFilterEnabled ? groupEmployeesByDepartment() : { All: employees };
 
   return (
     <>
@@ -219,97 +205,6 @@ const EmpTableContent = ({ employees, isDepartmentFilterEnabled }) => {
             </TableCell>
           </TableRow>
         )}
-
-        {/* with filter functionality */}
-
-      {/* {Object.keys(groupedEmployees).length === 0 ||
-        Object.values(groupedEmployees).every((employees) => employees.length === 0) ? (
-          <TableRow>
-            <TableCell colSpan={6} align="center">
-              <Typography variant="h6" color="textSecondary">
-                No Employees Found
-              </Typography>
-            </TableCell>
-          </TableRow>
-        ) : (
-          Object.keys(groupedEmployees).map((department) => (
-            <React.Fragment key={department}>
-              {isDepartmentFilterEnabled && department !== "All" && (
-                <TableRow>
-                  <TableCell colSpan={6} sx={{ backgroundColor: "#f5f5f5" }}>
-                    <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-                      {department}
-                    </Typography>
-                  </TableCell>
-                </TableRow>
-              )}
-              {groupedEmployees[department]
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((employee) => (
-                  <TableRow
-                    key={employee.id}
-                    sx={{
-                      p: 0,
-                      width: "100%",
-                      transition: "0.3s",
-                      "&:hover": {
-                        boxShadow: "0px 5px 15px rgba(0, 123, 255, 0.5)",
-                        transform: "scale(1)",
-                      },
-                    }}
-                  >
-                    <TableCell>
-                      <img
-                        src={employee.img}
-                        alt={employee.name}
-                        style={{
-                          width: "50px",
-                          height: "50px",
-                          borderRadius: "50%",
-                          objectFit: "cover",
-                        }}
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant="h6">{employee.name}</Typography>
-                      <Typography color="textSecondary" sx={{ fontSize: "13px" }}>
-                        {employee.department}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography color="textSecondary" variant="h6">
-                        {employee.phone}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography color="textSecondary" variant="h6">
-                        {employee.email}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography color="textSecondary" variant="h6">
-                        {employee.address}
-                      </Typography>
-                    </TableCell>
-                    <TableCell align="right">
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => setUpdateModalOpen(true)}
-                        sx={{ mr: 1 }}
-                      >
-                        Update
-                      </Button>
-                      <Button variant="contained" color="error" onClick={() => setOpen(true)}>
-                        Delete
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-            </React.Fragment>
-          ))
-        )
-      } */}
       </TableBody>
     </Table>
     {/* Pagination */}

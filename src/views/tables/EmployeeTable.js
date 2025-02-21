@@ -16,7 +16,7 @@ const EmployeeTable = () => {
   const [open, setOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterOpen, setFilterOpen] = useState(null);
-  const [isDepartmentFilterEnabled, setIsDepartmentFilterEnabled] = useState(false);
+  const [selectedDepartments, setSelectedDepartments] = useState([]);
 
   const handleAddButtonClick = () => setOpen(true);
 
@@ -25,8 +25,9 @@ const EmployeeTable = () => {
   };
   const filteredEmployees = employees.filter(
     (employee) =>
-      employee.name.toLowerCase().includes(searchQuery) ||
-      employee.email.toLowerCase().includes(searchQuery)
+        (employee.name.toLowerCase().includes(searchQuery) ||
+          employee.email.toLowerCase().includes(searchQuery)) &&
+        (selectedDepartments.length === 0 || selectedDepartments.includes(employee.department))
   );
 
   const handleFilterClick = (event) => {
@@ -34,6 +35,14 @@ const EmployeeTable = () => {
   };
   const handleFilterClose = () => {
     setFilterOpen(null);
+  };
+
+   // department checkbox changes
+   const handleDepartmentChange = (event) => {
+    const { value, checked } = event.target;
+    setSelectedDepartments((prev) =>
+      checked ? [...prev, value] : prev.filter((dept) => dept !== value)
+    );
   };
 
   return (
@@ -68,25 +77,30 @@ const EmployeeTable = () => {
                     Filter
                   </Button>
                   <Menu
-                  anchorEl={filterOpen}
-                  open={Boolean(filterOpen)}
-                  onClose={handleFilterClose}
-                  sx={{ p: 2 }}
+                    anchorEl={filterOpen}
+                    open={Boolean(filterOpen)}
+                    onClose={handleFilterClose}
+                    sx={{ p: 2 }}
                   >
-                    {/* Department Filter */}
-                    <Typography sx={{ px: 2, py: 1 }}>Filter By:</Typography>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={isDepartmentFilterEnabled}
-                          onChange={() => setIsDepartmentFilterEnabled(!isDepartmentFilterEnabled)}
-                          color="primary"
-                          sx={{ pl: 3}}
+                    <Box display="flex" flexDirection="column" sx={{ px: 2 }}>
+                      <Typography sx={{ py: 1 }}>Select Department:</Typography>
+                      {["Project Manager", "Web Designer", "HR Manager", "Frontend Engineer"].map((dept) => (
+                        <FormControlLabel
+                          key={dept}
+                          control={
+                            <Checkbox
+                              value={dept}
+                              checked={selectedDepartments.includes(dept)}
+                              onChange={handleDepartmentChange}
+                              color="primary"
+                            />
+                          }
+                          label={dept}
                         />
-                      }
-                      label="Department"
-                    />
+                      ))}
+                    </Box>
                   </Menu>
+
                   
                   {/* Search Bar */}
                   <TextField
@@ -121,7 +135,6 @@ const EmployeeTable = () => {
           >
             <EmpTableContent 
               employees={filteredEmployees}
-              isDepartmentFilterEnabled={isDepartmentFilterEnabled}
             />
           </Box>
         </CardContent>
