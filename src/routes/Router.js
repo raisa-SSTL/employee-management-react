@@ -38,7 +38,7 @@ const ThemeRoutes = [
       // { path: "dashboards/dashboard1", exact: true, element: <Dashboard1 /> },
       // { path: "tables/basic-table", element: <BasicTable /> },
       // { path: "/form-layouts/form-layouts", element: <FormLayouts /> },
-      // { path: "/form-elements/autocomplete", element: <ExAutoComplete /> },
+      { path: "/form-elements/autocomplete", element: <ExAutoComplete /> },
       // { path: "/form-elements/button", element: <ExButton /> },
       // { path: "/form-elements/checkbox", element: <ExCheckbox /> },
       // { path: "/form-elements/radio", element: <ExRadio /> },

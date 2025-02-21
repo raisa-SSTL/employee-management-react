@@ -79,6 +79,14 @@ const initialEmployees = [
   },
 ];
 
+// department list
+const departments = [
+  { label: "Web Designer"},
+  { label: "Project Manager"},
+  { label: "Frontend Engineer"},
+  { label: "HR Manager"},
+];
+
 // Provider Component
 export const EmployeeProvider = ({ children }) => {
   const [employees, setEmployees] = useState(initialEmployees);
@@ -102,7 +110,7 @@ export const EmployeeProvider = ({ children }) => {
   
 
   return (
-    <EmployeeContext.Provider value={{ employees, setEmployees, deleteEmployee, addEmployee, updateEmployee }}>
+    <EmployeeContext.Provider value={{ employees, setEmployees, deleteEmployee, addEmployee, updateEmployee, departments }}>
       {children}
     </EmployeeContext.Provider>
   );
