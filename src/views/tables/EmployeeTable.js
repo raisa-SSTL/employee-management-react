@@ -16,6 +16,7 @@ const EmployeeTable = () => {
   const [open, setOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterOpen, setFilterOpen] = useState(null);
+  const [isDepartmentFilterEnabled, setIsDepartmentFilterEnabled] = useState(false);
 
   const handleAddButtonClick = () => setOpen(true);
 
@@ -77,8 +78,8 @@ const EmployeeTable = () => {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          // checked={selectedFilters.priority.includes("High")}
-                          // onChange={() => handleCheckboxChange("priority", "High")}
+                          checked={isDepartmentFilterEnabled}
+                          onChange={() => setIsDepartmentFilterEnabled(!isDepartmentFilterEnabled)}
                           color="primary"
                           sx={{ pl: 3}}
                         />
@@ -120,6 +121,7 @@ const EmployeeTable = () => {
           >
             <EmpTableContent 
               employees={filteredEmployees}
+              isDepartmentFilterEnabled={isDepartmentFilterEnabled}
             />
           </Box>
         </CardContent>
