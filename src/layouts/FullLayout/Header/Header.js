@@ -3,8 +3,8 @@ import React from "react";
 
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
-import AddToPhotosOutlinedIcon from '@mui/icons-material/AddToPhotosOutlined';
-import PersonAddOutlinedIcon from '@mui/icons-material/PersonAddOutlined';
+// import AddToPhotosOutlinedIcon from '@mui/icons-material/AddToPhotosOutlined';
+// import PersonAddOutlinedIcon from '@mui/icons-material/PersonAddOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
@@ -46,15 +46,15 @@ const Header = (props) => {
   };
 
   // 5
-  const [anchorEl5, setAnchorEl5] = React.useState(null);
+  // const [anchorEl5, setAnchorEl5] = React.useState(null);
 
-  const handleClick5 = (event) => {
-    setAnchorEl5(event.currentTarget);
-  };
+  // const handleClick5 = (event) => {
+  //   setAnchorEl5(event.currentTarget);
+  // };
 
-  const handleClose5 = () => {
-    setAnchorEl5(null);
-  };
+  // const handleClose5 = () => {
+  //   setAnchorEl5(null);
+  // };
 
   return (
     <AppBar sx={{

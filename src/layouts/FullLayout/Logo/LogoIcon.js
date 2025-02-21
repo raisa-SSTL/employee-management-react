@@ -1,5 +1,5 @@
 import React from "react";
-import logoicn from "../../../assets/images/logo-dark.svg";
+// import logoicn from "../../../assets/images/logo-dark.svg";
 import brotecslogo from "../../../assets/images/brotecslogo.png";
 
 const LogoIcon = (props) => {

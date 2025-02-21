@@ -3,7 +3,6 @@ import { Box, Typography, TextField, Button, Modal } from "@mui/material";
 import { toast } from "react-toastify";
 import { useEmployees } from "../../context/EmployeeContext";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
-import u3 from "../../assets/images/backgrounds/u3.jpg";
 import defaultuser from "../../assets/images/users/defaultuser.jpg";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/bootstrap.css";

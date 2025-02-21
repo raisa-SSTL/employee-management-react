@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import { useEmployees } from "../context/EmployeeContext";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const DeleteConfirmationDialog = ({ open, onClose, message, employee }) => {
 

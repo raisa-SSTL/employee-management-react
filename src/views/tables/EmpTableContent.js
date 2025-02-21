@@ -7,19 +7,15 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  Chip,
-  Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TablePagination, 
+  Button, TablePagination, 
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import WarningAmberIcon from '@mui/icons-material/WarningAmber';
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UpdateEmployeeModal from "../modal/UpdateEmployeeModal";
 import DeleteConfirmationDialog from "../../components/DeleteConfirmationDialogue";
 
 const EmpTableContent = ({ employees }) => {
 
-  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [selectedEmp, setSelectedEmp] = useState(null);
   const [updateModalOpen, setUpdateModalOpen] = useState(false);

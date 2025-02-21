@@ -1,17 +1,14 @@
-import React, {useContext, useState} from "react";
-import { Card, CardContent, Box, Typography, TextField, Fab, Modal, Button, Menu, FormControlLabel, Checkbox } from "@mui/material";
+import React, { useState} from "react";
+import { Card, CardContent, Box, Typography, TextField, Fab, Button, Menu, FormControlLabel, Checkbox } from "@mui/material";
 import EmpTableContent from "./EmpTableContent";
 import AddToPhotosOutlinedIcon from '@mui/icons-material/AddToPhotosOutlined';
-import { useNavigate } from "react-router-dom";
 import {useEmployees} from "../../context/EmployeeContext";
 import FilterListIcon from '@mui/icons-material/FilterList';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AddEmployeeModal from "../modal/AddEmployeeModal";
 
 const EmployeeTable = () => {
 
-  const navigate = useNavigate();
   const { employees } = useEmployees(); 
   const [open, setOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");

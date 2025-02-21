@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {
   Typography,
   Box,
-  Button, Grid, Card, CardContent, TableRow, TableCell, TablePagination
+  Button, Grid, Card, CardContent, TablePagination
 } from "@mui/material";
 import DeleteConfirmationDialog from "../../components/DeleteConfirmationDialogue";
 import { ToastContainer } from "react-toastify";

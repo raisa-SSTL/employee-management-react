@@ -1,6 +1,5 @@
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
-import AddTask from "../views/task/AddTask.js";
 import EmployeeTable from "../views/tables/EmployeeTable.js";
 import EmployeeView from "../views/tables/EmployeeView.js";
 import EmployeeCard from "../views/cards/EmployeeCard.js";
@@ -10,22 +9,22 @@ const FullLayout = lazy(() => import("../layouts/FullLayout/FullLayout.js"));
 /****End Layouts*****/
 
 /*****Pages******/
-const Dashboard1 = lazy(() => import("../views/dashboards/Dashboard1.js"));
+// const Dashboard1 = lazy(() => import("../views/dashboards/Dashboard1.js"));
 
 /*****Tables******/
-const BasicTable = lazy(() => import("../views/tables/BasicTable.js"));
+// const BasicTable = lazy(() => import("../views/tables/BasicTable.js"));
 
 // form elements
-const ExAutoComplete = lazy(() =>
-  import("../views/FormElements/ExAutoComplete.js")
-);
-const ExButton = lazy(() => import("../views/FormElements/ExButton.js"));
-const ExCheckbox = lazy(() => import("../views/FormElements/ExCheckbox.js"));
-const ExRadio = lazy(() => import("../views/FormElements/ExRadio.js"));
-const ExSlider = lazy(() => import("../views/FormElements/ExSlider.js"));
-const ExSwitch = lazy(() => import("../views/FormElements/ExSwitch.js"));
-// form layouts
-const FormLayouts = lazy(() => import("../views/FormLayouts/FormLayouts.js"));
+// const ExAutoComplete = lazy(() =>
+//   import("../views/FormElements/ExAutoComplete.js")
+// );
+// const ExButton = lazy(() => import("../views/FormElements/ExButton.js"));
+// const ExCheckbox = lazy(() => import("../views/FormElements/ExCheckbox.js"));
+// const ExRadio = lazy(() => import("../views/FormElements/ExRadio.js"));
+// const ExSlider = lazy(() => import("../views/FormElements/ExSlider.js"));
+// const ExSwitch = lazy(() => import("../views/FormElements/ExSwitch.js"));
+// // form layouts
+// const FormLayouts = lazy(() => import("../views/FormLayouts/FormLayouts.js"));
 
 /*****Routes******/
 
