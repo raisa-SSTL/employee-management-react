@@ -115,7 +115,7 @@ const EmpTableContent = ({ employees, isDepartmentFilterEnabled }) => {
 
         {/* without filter functionality */}
 
-        {/* {paginatedEmployees.length > 0 ? (
+        {paginatedEmployees.length > 0 ? (
           paginatedEmployees.map((employee) => (
             <TableRow key={employee.id} 
               sx={{
@@ -183,14 +183,14 @@ const EmpTableContent = ({ employees, isDepartmentFilterEnabled }) => {
                 </Typography>
               </TableCell>
               <TableCell align="right">
-                <Button
+                {/* <Button
                   variant="contained"
                   color="primary"
                   sx={{ mr: 1 }}
                   onClick={() => navigate(`/employee-view/${employee.id}`)}
                 >
                   View
-                </Button>
+                </Button> */}
                 <Button
                   variant="contained"
                   color="primary"
@@ -218,11 +218,11 @@ const EmpTableContent = ({ employees, isDepartmentFilterEnabled }) => {
               </Typography>
             </TableCell>
           </TableRow>
-        )} */}
+        )}
 
         {/* with filter functionality */}
 
-      {Object.keys(groupedEmployees).length === 0 ||
+      {/* {Object.keys(groupedEmployees).length === 0 ||
         Object.values(groupedEmployees).every((employees) => employees.length === 0) ? (
           <TableRow>
             <TableCell colSpan={6} align="center">
@@ -309,7 +309,7 @@ const EmpTableContent = ({ employees, isDepartmentFilterEnabled }) => {
             </React.Fragment>
           ))
         )
-      }
+      } */}
       </TableBody>
     </Table>
     {/* Pagination */}

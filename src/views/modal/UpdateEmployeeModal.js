@@ -7,10 +7,11 @@ import u3 from "../../assets/images/backgrounds/u3.jpg";
 import defaultuser from "../../assets/images/users/defaultuser.jpg";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/bootstrap.css";
+import Autocomplete from '@mui/material/Autocomplete';
 
 const UpdateEmployeeModal = ({ open, setOpen, employee }) => {
 
-    const { updateEmployee } = useEmployees(); // from context
+    const { updateEmployee, departments } = useEmployees(); // from context
     const [updatedEmployee, setUpdatedEmployee] = useState(employee);
     const [imagePreview, setImagePreview] = useState(updatedEmployee?.img || defaultuser ); 
     const [errors, setErrors] = useState({});
@@ -185,16 +186,35 @@ const UpdateEmployeeModal = ({ open, setOpen, employee }) => {
                 error={!!errors.email} 
                 helperText={errors.email} 
               />
+              <Autocomplete
+                disablePortal
+                id="update-department"
+                options={departments}
+                getOptionLabel={(option) => option.label}
+                value={departments.find((dept) => dept.label === updatedEmployee?.department) || null}
+                fullWidth
+                onChange={(event, value) =>
+                  setUpdatedEmployee((prev) => ({ ...prev, department: value ? value.label : "" }))
+                }
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Department"
+                    error={!!errors.department}
+                    helperText={errors.department}
+                  />
+                )}
+              />
               <TextField 
                 label="Address" 
                 name="address" 
                 value={updatedEmployee?.address || ""}
                 onChange={handleInputChange} 
-                fullWidth sx={{ mb: 2 }} 
+                fullWidth sx={{ mb: 2, mt:2 }} 
                 error={!!errors.address} 
                 helperText={errors.address} 
               />
-              <TextField 
+              {/* <TextField 
                 label="Department" 
                 name="department" 
                 value={updatedEmployee?.department || ""} 
@@ -202,7 +222,7 @@ const UpdateEmployeeModal = ({ open, setOpen, employee }) => {
                 fullWidth sx={{ mb: 2 }} 
                 error={!!errors.department} 
                 helperText={errors.department} 
-              />
+              /> */}
               {/* <input type="file" accept="image/*" onChange={handleImageChange} style={{ marginBottom: "16px" }} /> */}
               <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 2 }}>
                 <Button onClick={handleClose} >Cancel</Button>
