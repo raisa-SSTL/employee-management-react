@@ -1,7 +1,7 @@
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import EmployeeTable from "../views/tables/EmployeeTable.js";
-import EmployeeView from "../views/tables/EmployeeView.js";
+// import EmployeeView from "../views/tables/EmployeeView.js";
 import EmployeeCard from "../views/cards/EmployeeCard.js";
 
 /****Layouts*****/
@@ -23,7 +23,7 @@ const FullLayout = lazy(() => import("../layouts/FullLayout/FullLayout.js"));
 // const ExRadio = lazy(() => import("../views/FormElements/ExRadio.js"));
 // const ExSlider = lazy(() => import("../views/FormElements/ExSlider.js"));
 // const ExSwitch = lazy(() => import("../views/FormElements/ExSwitch.js"));
-// // form layouts
+// form layouts
 // const FormLayouts = lazy(() => import("../views/FormLayouts/FormLayouts.js"));
 
 /*****Routes******/
@@ -48,7 +48,7 @@ const ThemeRoutes = [
 
       { path: "/", element: <Navigate to="employee-table" /> },
       { path: "/employee-table", element: <EmployeeTable /> },
-      { path: "/employee-view/:id", element: <EmployeeView /> },
+      // { path: "/employee-view/:id", element: <EmployeeView /> },
       { path: "/employee-card", element: <EmployeeCard /> },
     ],
   },
